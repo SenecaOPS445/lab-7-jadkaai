@@ -4,7 +4,7 @@
 class Time:
     """Simple object type for time of the day.
        data attributes: hour, minute, second
-       function attributes: __init__, __str__, __repr__,
+       function attributes: __init__, __str__, __repr__, __add__,
                             time_to_sec, format_time,
                             change_time, sum_times
     """
@@ -13,7 +13,20 @@ class Time:
         self.hour = hour
         self.minute = minute
         self.second = second
+
+    def __str__(self):
+        """Return a string representation for the object for printing"""
+        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
+
+    def __repr__(self):
+        """Return a string representation for the object for the interactive shell"""
+        return f'{self.hour:02d}.{self.minute:02d}.{self.second:02d}'
     
+    def __add__(self, t2):
+        """Add two Time objects using the + operator and return the sum as a new Time object"""
+        total_seconds = self.time_to_sec() + t2.time_to_sec()
+        return sec_to_time(total_seconds)
+
     def format_time(self):
         """Return Time object as a formatted string"""
         return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
